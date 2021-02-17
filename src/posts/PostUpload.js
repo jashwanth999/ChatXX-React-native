@@ -73,7 +73,7 @@ function Post({ navigation, route }) {
   };
   const upload = () => {
     setact(true);
-    let apiUrl = 'https://api.cloudinary.com/v1_1/jashwanth/image/upload';
+    let apiUrl = 'https://api.cloudinary.com/v1_1/******/image/upload';
 
     let data = {
       file: baseimage,
