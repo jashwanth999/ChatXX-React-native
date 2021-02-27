@@ -1,5 +1,13 @@
 <h3> ChatXX</h3>
-<p> It is a real time chat application where we can also find people near by you</p>
+<h4> It is a real time chat application where we can also find people near by you</h4>
+<h3> Dependencies</h3>
+<br>
+<ul>
+ <li> expo-camera </li>
+  <li> react-navigation</li>
+ <li> firebase</li>
+  <li> Async storage</li>
+ </ul>
 <div style="display:flex;flexDirection:row;" " width="200" height="400" style="margin:2;"/>
  <img src="https://user-images.githubusercontent.com/65611955/109396303-def9e700-7956-11eb-8751-226aa4b06220.png" width="200" height"400" style="margin:2;"/>
   <img src="https://user-images.githubusercontent.com/65611955/109396515-000f0780-7958-11eb-9372-8b5308ac2261.png" width="200" height"400" style="margin:2;"/>
