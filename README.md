@@ -1,6 +1,9 @@
 <h3> ChatXX</h3>
 <p> It is a real time chat application where we can also find people near by you</p>
 <div style="display:flex;flexDirection:row;" " width="200" height="400" style="margin:2;"/>
+ <img src="https://user-images.githubusercontent.com/65611955/109396303-def9e700-7956-11eb-8751-226aa4b06220.png" width="200" height"400" style="margin:2;"/>
+<img src="https://user-images.githubusercontent.com/65611955/109396304-df927d80-7956-11eb-96e4-9272235300cb.png" width="200" height"400" style="margin:2;"/>
+<img src="https://user-images.githubusercontent.com/65611955/109396306-df927d80-7956-11eb-9857-681a365c8c09.png" width="200" height"400" style="margin:2;"/>
 <img src="https://user-images.githubusercontent.com/65611955/109395983-5cbcf300-7955-11eb-8346-2e6fff728923.png" width="200" height="400" style="margin:2;"/>
 <img src="https://user-images.githubusercontent.com/65611955/109395984-5cbcf300-7955-11eb-83fa-ebfea8775ec9.png" width="200" height="400" style="margin:2;"/>
 <img src="https://user-images.githubusercontent.com/65611955/109395985-5d558980-7955-11eb-8278-f0fdf57aa717.png" width="200" height="400" style="margin:2;"/>
@@ -13,8 +16,6 @@
   <img src="https://user-images.githubusercontent.com/65611955/109395996-60507a00-7955-11eb-9fd0-54f707dff687.png" width="200" height"400" style="margin:2;"/>
 <img src="https://user-images.githubusercontent.com/65611955/109395997-60e91080-7955-11eb-828b-a8155dfab418.png" width="200" height"400" style="margin:2;"/>
 <img src="https://user-images.githubusercontent.com/65611955/109396301-ddc8ba00-7956-11eb-889b-4f518cea863c.png" width="200" height"400" style="margin:2;"/>
-<img src="https://user-images.githubusercontent.com/65611955/109396303-def9e700-7956-11eb-8751-226aa4b06220.png" width="200" height"400" style="margin:2;"/>
-<img src="https://user-images.githubusercontent.com/65611955/109396304-df927d80-7956-11eb-96e4-9272235300cb.png" width="200" height"400" style="margin:2;"/>
-<img src="https://user-images.githubusercontent.com/65611955/109396306-df927d80-7956-11eb-9857-681a365c8c09.png" width="200" height"400" style="margin:2;"/>
+
  </div>
 
