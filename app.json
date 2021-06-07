@@ -1,10 +1,12 @@
 {
   "expo": {
+
     "name": "ChatXX",
     "slug": "ChatXX",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/imageicon.png",
+
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -16,6 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
+
         "foregroundImage": "./assets/imageicon.png",
         "backgroundColor": "#FFFFFF"
       },
@@ -32,3 +35,5 @@
     }
   }
 }
+
+        
