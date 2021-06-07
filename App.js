@@ -1,21 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import {
 
+  StatusBar,
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+
+import {LogBox} from 'react-native'
+import Mystacks from './navigation/Mystack'
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
+console.disableYellowBox = true;
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar backgroundColor="#EA8BA5" />
+      <Mystacks />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

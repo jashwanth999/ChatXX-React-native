@@ -4,12 +4,7 @@
     "slug": "ChatXX",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "icon": "./assets/imageicon.png",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -21,12 +16,19 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/imageicon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.jashwanth.snack6d75662be5f04425863941ea2c33c8bb",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBrSVbYuK_uaDOIQIUOX0EFvsDy7sExoEE"
+        }
       }
+    
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/imageicon.png"
     }
   }
 }
