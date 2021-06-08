@@ -7,9 +7,9 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-import { ListItem, Avatar } from '../src/Story/node_modules/react-native-elements';
-import { auth, db } from '../auth/firebase.js';
-import firebase from '../src/auth/node_modules/@firebase/app';
+import { ListItem, Avatar } from 'react-native-elements';
+import { auth, db } from '../firebase.js';
+import firebase from '@firebase/app';
 function Groupusers({
   username,
   roomid,

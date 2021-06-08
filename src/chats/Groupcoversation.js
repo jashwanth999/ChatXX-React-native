@@ -13,7 +13,7 @@ import {
   MaterialIcons,
 } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
-import { db } from '../auth/firebase.js';
+import { db } from '../firebase.js';
 export default function Groupconversation({
   id,
   message,
@@ -121,6 +121,16 @@ export default function Groupconversation({
               borderTopLeftRadius: 0,
               margin: 2,
             }}>
+                <Text
+                style={{
+                  fontSize: 13,
+                  padding: 6,
+                  paddingBottom: 0,
+                  fontWeight: 'bold',
+                  color: color[Math.floor(Math.random() * (color.length - 1))],
+                }}>
+                {username}
+              </Text>
             <Image
               source={{ uri: chatimageurl }}
               style={{ width: 200, height: 200, resizeMode: 'contain' }}

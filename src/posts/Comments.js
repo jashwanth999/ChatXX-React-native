@@ -9,17 +9,17 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import { Header } from '../Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { ListItem, Avatar } from '../Story/node_modules/react-native-elements';
-import { Divider } from '../Story/node_modules/react-native-elements';
-import { db, auth } from '../auth/firebase.js';
+import { ListItem, Avatar } from 'react-native-elements';
+import { Divider } from 'react-native-elements';
+import { db, auth } from '../firebase.js';
 import CommentView from './commentView.js';
-import firebase from '../auth/node_modules/@firebase/app';
+import firebase from '@firebase/app';
 
 export default function Comments({ navigation, route }) {
   const user = auth.currentUser;

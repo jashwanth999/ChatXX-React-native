@@ -9,15 +9,12 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-import { ListItem, Avatar } from '../Notifications/Story/node_modules/react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
-  MaterialIcons,
-  FontAwesome,
 } from '@expo/vector-icons';
-import { auth, db } from '../auth/firebase.js';
-import { Header } from '../Notifications/Story/node_modules/react-native-elements';
+import { auth, db } from '../../firebase.js';
+import { Header } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import Userpost from './Userposts.js';
 export default function Userprofile({ navigation, route }) {
@@ -26,8 +23,6 @@ export default function Userprofile({ navigation, route }) {
   let deviceHeight = Dimensions.get('window').height;
 
   const [presentuser, setPresentuser] = useState([]);
-  const [follow, setfollow] = useState(false);
-  const [isfollowing, setisfollowing] = useState(false);
   const [followarray, setfollowarray] = useState([]);
   const [followlength, setfollowlenth] = useState([]);
   const [followinglength, setisfollowinglength] = useState([]);
@@ -233,14 +228,7 @@ export default function Userprofile({ navigation, route }) {
                 }}>
                 {presentuser.username}
               </Text>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                }}>
-                Im Jashwanth
-              </Text>
+              
             </View>
             <TouchableOpacity
               onPress={() =>

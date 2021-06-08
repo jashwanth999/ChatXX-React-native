@@ -5,16 +5,18 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Linking
 } from 'react-native';
-import { ListItem, Avatar } from '../Notifications/Story/node_modules/react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
   FontAwesome,
 } from '@expo/vector-icons';
-import { auth, db } from './firebase.js.js';
-import {  Overlay } from '../Notifications/Story/node_modules/react-native-elements';
+import { auth, db } from '../../firebase.js';
+import {  Overlay } from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 export default function Drawercontent({ navigation }) {
   const user = auth.currentUser;
   const [presentuser, setPresentuser] = useState([]);
@@ -22,16 +24,9 @@ export default function Drawercontent({ navigation }) {
   const [groupname, setgroupname] = useState('');
   const [followerlens, setfollowerlen] = useState([]);
   const [followinglen, setfollowinglen] = useState([]);
- 
-  useEffect(() => {
-    db.collection('users')
-      .doc(user.uid)
-      .collection('followers')
-      .onSnapshot((snapshot) => {
-        setfollowerlen(snapshot.docs.map((doc) => doc.data()));
-      });
-     
-  }, [user.uid]);
+  const openabout=()=>{
+    Linking.openURL("https://jashwanth.netlify.app/");
+  }
   useEffect(() => {
     db.collection('users')
       .doc(user.uid)
@@ -39,22 +34,31 @@ export default function Drawercontent({ navigation }) {
       .onSnapshot((snapshot) => {
         setfollowinglen(snapshot.docs.map((doc) => doc.data()));
       });
-  }, [user.uid]);
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
-
-  useEffect(() => {
-    db.collection('users')
+      db.collection('users')
       .doc(user.uid)
       .onSnapshot((doc) => {
         setPresentuser(doc.data());
       });
+      db.collection('users')
+      .doc(user.uid)
+      .collection('followers')
+      .onSnapshot((snapshot) => {
+        setfollowerlen(snapshot.docs.map((doc) => doc.data()));
+      });
   }, [user.uid]);
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
   const logout = () => {
-    auth.signOut().then(() => {
+   
+    auth.signOut().then(async() => {
       navigation.navigate('Login');
+      await AsyncStorage.removeItem('email');
+      await AsyncStorage.removeItem('message');
+      
     });
+    
+
   };
   const create = () => {
     db.collection('users')
@@ -70,7 +74,7 @@ export default function Drawercontent({ navigation }) {
       })
       .then(() => {
         toggleOverlay();
-        navigation.openDrawer();
+        navigation.closeDrawer();
       });
   };
   const nothing = () => {};
@@ -207,7 +211,8 @@ export default function Drawercontent({ navigation }) {
             Favourites
           </Text>
         </View>
-        <View
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Myposts')}
           style={{
             display: 'flex',
             flex: 1,
@@ -215,7 +220,11 @@ export default function Drawercontent({ navigation }) {
             padding: 15,
             marginTop: 5,
           }}>
-          <MaterialCommunityIcons name="message-text" color="white" size={30} />
+          <MaterialCommunityIcons
+            name="image-multiple"
+            color="white"
+            size={30}
+          />
           <Text
             style={{
               color: 'white',
@@ -225,9 +234,9 @@ export default function Drawercontent({ navigation }) {
               marginTop: 4,
             }}>
             {' '}
-            New Chat
+            Myposts
           </Text>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('settings')}>
           <View
             style={{
@@ -252,6 +261,7 @@ export default function Drawercontent({ navigation }) {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
+         onPress={openabout}
           style={{
             display: 'flex',
             flex: 1,
@@ -273,7 +283,7 @@ export default function Drawercontent({ navigation }) {
               marginTop: 4,
             }}>
             {' '}
-            Instructions
+             About
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={logout}>
@@ -312,8 +322,8 @@ export default function Drawercontent({ navigation }) {
           <View
             style={{
               display: 'flex',
-              border: 'none',
-              outline: 'none',
+              
+              
               margin: 10,
               flexDirection: 'column',
               width: '79%',
@@ -326,8 +336,8 @@ export default function Drawercontent({ navigation }) {
               style={{
                 height: 40,
                 marginLeft: 7,
-                outline: 'none',
-                border: 'none',
+                
+                
                 fontSize: 17,
               }}
               placeholder="GroupName"

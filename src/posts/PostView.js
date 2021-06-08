@@ -7,8 +7,8 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
-import { ListItem, Avatar } from '../Story/node_modules/react-native-elements';
-import { Divider } from '../Story/node_modules/react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
+import { Divider } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
@@ -16,8 +16,8 @@ import {
   AntDesign,
 } from '@expo/vector-icons';
 import { BottomSheet } from 'react-native-btr';
-import Shareusers from '../Shareusers.js';
-import { auth, db } from '../auth/firebase.js';
+import Shareusers from '../../Shareusers.js';
+import { auth, db } from '../../firebase.js';
 export default function PostView({
   propic,
   photourl,
@@ -35,6 +35,7 @@ export default function PostView({
   const [users, setUsers] = useState([]);
   const [likes, setlikes] = useState([]);
   const [value, setvalue] = useState('');
+  const [save, setsave] = useState(false);
   useEffect(() => {
     db.collection('users')
       .doc(id)
@@ -43,7 +44,18 @@ export default function PostView({
       .onSnapshot((doc) => {
         setlikes(doc.data());
       });
-  }, []);
+      db.collection('users')
+      .doc(user.uid)
+      .collection('chatusers')
+      .onSnapshot((snapshot) => {
+        setUsers(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            users: doc.data(),
+          }))
+        );
+      });
+  }, [user?.uid]);
 
   const piclike = () => {
     db.collection('users').doc(user.uid).collection('images').doc(id).update({
@@ -66,9 +78,9 @@ export default function PostView({
       propic: propic,
       photourl: photourl,
     });
-    db.collection("users").doc(id).collection("notifications").add({
-      x:0
-    })
+    db.collection('users').doc(id).collection('notifications').add({
+      x: 0,
+    });
   };
   const picdislike = () => {
     if (likes?.likes) {
@@ -91,27 +103,8 @@ export default function PostView({
       });
     }
   };
-
-  useEffect(() => {
-    db.collection('users')
-      .doc(user.uid)
-      .collection('chatusers')
-      .onSnapshot((snapshot) => {
-        setUsers(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            users: doc.data(),
-          }))
-        );
-      });
-  }, [user.uid]);
   const toggleBottomNavigationView = () => {
     setVisible(!visible);
-  };
-  const [isvisible, setisVisible] = useState(false);
-
-  const toggleOverlay = () => {
-    setisVisible(!isvisible);
   };
   return (
     <View
@@ -142,14 +135,16 @@ export default function PostView({
             }}>
             {username}
           </Text>
-          <View style={{ position: 'absolute', right: 10 }}>
+          <TouchableOpacity
+            onPress={() => setsave(true)}
+            style={{ position: 'absolute', right: 10 }}>
             <MaterialIcons
-              name="more-vert"
+              name={save ? 'bookmark' : 'bookmark-outline'}
               color="black"
               size={22}
               style={{}}
             />
-          </View>
+          </TouchableOpacity>
         </View>
         {caption ? (
           <View style={{ position: 'relative', left: '6%' }}>
@@ -287,8 +282,8 @@ export default function PostView({
             <View
               style={{
                 display: 'flex',
-                border: 'none',
-                outline: 'none',
+                
+               
                 marginTop: 10,
                 flexDirection: 'column',
                 width: '90%',
@@ -301,8 +296,8 @@ export default function PostView({
                 style={{
                   height: 40,
                   marginLeft: 7,
-                  outline: 'none',
-                  border: 'none',
+                 
+                  
                   fontSize: 17,
                 }}
                 value={value}

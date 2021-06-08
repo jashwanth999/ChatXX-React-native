@@ -3,31 +3,22 @@ import {
   View,
   KeyboardAvoidingView,
   TextInput,
-  StyleSheet,
   Text,
   Platform,
-  TouchableWithoutFeedback,
-  Button,
-  Keyboard,
-  SafeAreaView,
-  Image,
   TouchableOpacity,
   StatusBar,
   ScrollView,
 } from 'react-native';
-import { auth, db } from './firebase.js';
+import { auth, db } from '../../firebase.js';
 import * as Location from 'expo-location';
 import Activityind from '../styles/Activityind.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [region, setRegion] = useState(null);
   const [lat, setlat] = useState(null);
   const [long, setlong] = useState(null);
   const [act, setact] = useState(false);
-  const [enable, setenable] = useState(false);
   const scrollViewRef = useRef();
   useEffect(() => {
     (async () => {
@@ -50,27 +41,28 @@ export default function Login({ navigation }) {
     })();
   }, []);
 
-  const login = () => {
-    const user = auth.currentUser;
+  const login = async() => {
     setact(true);
-
-    auth
+   await auth
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        db.collection('users').doc(user.uid).update({
-          latitude: lat,
-          longitude: long,
-        });
-      })
-      .then(() => {
-        setact(false);
-        navigation.navigate('Splashscreen');
+      
+      .then(async() => {
+        const user = auth.currentUser;
+          db.collection('users').doc(user.uid).update({
+            latitude: lat,
+            longitude: long,
+          });
+          try {
+            await AsyncStorage.setItem('email', email)
+            navigation.navigate('drawerscreen');
+          } catch (e) {
+
+        }
       })
       .catch((error) => {
-        console.log(error.message);
+        alert(error.message);
         setact(false);
       });
-
     setEmail('');
     setPassword('');
   };
@@ -119,8 +111,8 @@ export default function Login({ navigation }) {
               <View
                 style={{
                   display: 'flex',
-                  border: 'none',
-                  outline: 'none',
+                 
+                  
                   margin: 10,
                   flexDirection: 'column',
                   width: '79%',
@@ -137,8 +129,8 @@ export default function Login({ navigation }) {
                   style={{
                     height: 40,
                     marginLeft: 7,
-                    outline: 'none',
-                    border: 'none',
+                    
+                  
                     fontSize: 17,
                   }}
                   value={email}
@@ -149,8 +141,8 @@ export default function Login({ navigation }) {
               <View
                 style={{
                   display: 'flex',
-                  border: 'none',
-                  outline: 'none',
+                 
+                  
                   margin: 10,
                   flexDirection: 'column',
                   width: '79%',
@@ -167,8 +159,8 @@ export default function Login({ navigation }) {
                   style={{
                     height: 40,
                     marginLeft: 7,
-                    outline: 'none',
-                    border: 'none',
+                    
+                 
                     fontSize: 17,
                   }}
                   value={password}
@@ -222,3 +214,4 @@ export default function Login({ navigation }) {
     </KeyboardAvoidingView>
   );
 }
+

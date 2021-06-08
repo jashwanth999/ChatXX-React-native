@@ -7,11 +7,11 @@ import {
   ActivityIndicator,
   StatusBar,
 } from 'react-native';
-import { Header } from '../src/Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/MaterialIcons';
-import { Avatar } from '../src/Story/node_modules/react-native-elements';
-import { auth, db, storage } from '../auth/firebase.js';
-import firebase from '../src/auth/node_modules/@firebase/app';
+import { Avatar } from 'react-native-elements';
+import { auth, db, storage } from '../firebase.js';
+import firebase from '@firebase/app';
 
 function Chatcamera({ navigation, route }) {
   const { image, username, roomid, userpropic, imageurl } = route.params;
@@ -52,6 +52,12 @@ function Chatcamera({ navigation, route }) {
       method: 'POST',
     }).then(async (r) => {
       let data = await r.json();
+      setAct(false);
+      navigation.navigate('messagescreen', {
+        username: username,
+        roomid: roomid,
+        propic: userpropic,
+      });
 
       db.collection('users')
         .doc(user.uid)
@@ -114,12 +120,7 @@ function Chatcamera({ navigation, route }) {
           alert(err);
         });
     });
-    setAct(false);
-    navigation.navigate('messagescreen', {
-      username: username,
-      roomid: roomid,
-      propic: userpropic,
-    });
+   
   };
   return (
     <View style={{ backgroundColor: 'white', height: '100%' }}>

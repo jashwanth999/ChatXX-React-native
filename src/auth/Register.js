@@ -1,11 +1,19 @@
-import React, { useState, useEffect, Component,useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity,ScrollView } from 'react-native';
-import firebase from 'firebase';
-import { Button, Overlay } from '../Story/node_modules/react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { db, auth } from './firebase.js';
+import React, { useState, useEffect, Component, useRef } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import { db, auth } from '../../firebase.js';
 import * as Location from 'expo-location';
-import Activityind from '../styles/Activityind.js';
+import Activityind from '../../Activityind.js';
+import {
+  MaterialCommunityIcons,
+  Ionicons,
+  MaterialIcons,
+} from '@expo/vector-icons';
 function Register({ navigation }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -39,9 +47,7 @@ function Register({ navigation }) {
     })();
   }, []);
 
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
+
 
   const Signup = () => {
     setact(true);
@@ -82,17 +88,34 @@ function Register({ navigation }) {
   const ok = () => {};
 
   return (
-    <View style={{ flex: 1, justifyContent: 'flex-end', }}>
+    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       {act ? (
         <Activityind />
       ) : (
         <ScrollView
           contentContainerStyle={{
             backgroundColor: '#13E6E6',
-
             flex: 1,
             justifyContent: 'flex-end',
           }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Login')}
+            style={{
+              margin: 10,
+              backgroundColor: '#3CBC87',
+              alignItems: 'center',
+              borderRadius: 55,
+              width: 55,
+              height: 55,
+              alignContent: 'center',
+              justifyContent: 'center',
+              elevation: 2,
+              position: 'absolute',
+              top: 20,
+              left: 5,
+            }}>
+            <MaterialCommunityIcons name="arrow-left" color="white" size={23} />
+          </TouchableOpacity>
           <View
             style={{
               backgroundColor: 'white',
@@ -118,8 +141,8 @@ function Register({ navigation }) {
             <View
               style={{
                 display: 'flex',
-                border: 'none',
-                outline: 'none',
+               
+               
                 margin: 10,
                 flexDirection: 'column',
                 width: '79%',
@@ -135,8 +158,8 @@ function Register({ navigation }) {
                 style={{
                   height: 40,
                   marginLeft: 7,
-                  outline: 'none',
-                  border: 'none',
+                 
+                 
                   fontSize: 17,
                 }}
                 value={username}
@@ -144,40 +167,12 @@ function Register({ navigation }) {
                 onChangeText={(username) => setUsername(username)}
               />
             </View>
+
             <View
               style={{
                 display: 'flex',
-                border: 'none',
-                outline: 'none',
-                margin: 10,
-                flexDirection: 'column',
-                width: '79%',
-                backgroundColor: '#EAEDED',
-                borderRadius: 10,
-                height: 65,
-                elevation: 4,
-              }}>
-              <Text style={{ opacity: 0.3, fontWeight: 'bold', marginLeft: 7 }}>
-                Phonenumber
-              </Text>
-              <TextInput
-                style={{
-                  height: 40,
-                  marginLeft: 7,
-                  outline: 'none',
-                  border: 'none',
-                  fontSize: 17,
-                }}
-                value={phonenumber}
-                placeholder="Phonenumber"
-                onChangeText={(phonenumber) => setphonenumber(phonenumber)}
-              />
-            </View>
-            <View
-              style={{
-                display: 'flex',
-                border: 'none',
-                outline: 'none',
+               
+               
                 margin: 10,
                 flexDirection: 'column',
                 width: '79%',
@@ -193,8 +188,8 @@ function Register({ navigation }) {
                 style={{
                   height: 40,
                   marginLeft: 7,
-                  outline: 'none',
-                  border: 'none',
+                 
+                 
                   fontSize: 17,
                 }}
                 value={email}
@@ -205,8 +200,8 @@ function Register({ navigation }) {
             <View
               style={{
                 display: 'flex',
-                border: 'none',
-                outline: 'none',
+               
+               
                 margin: 10,
                 flexDirection: 'column',
                 width: '79%',
@@ -222,8 +217,8 @@ function Register({ navigation }) {
                 style={{
                   height: 40,
                   marginLeft: 7,
-                  outline: 'none',
-                  border: 'none',
+                 
+                 
                   fontSize: 17,
                 }}
                 value={password}

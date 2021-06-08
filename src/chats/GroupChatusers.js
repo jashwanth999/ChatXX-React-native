@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { ListItem, Avatar } from '../src/Story/node_modules/react-native-elements';
-import { auth } from '../auth/firebase.js';
+import { ListItem, Avatar } from 'react-native-elements';
+import { auth } from '../firebase.js';
 function Groupchatusers({ username, id, navigation, propic }) {
   const user = auth.currentUser;
 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StatusBar } from 'react-native';
-import { Header } from '../src/Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { auth, db } from '../auth/firebase.js';
+import { auth, db } from '../firebase.js';
 import Userlist from '../Userlist.js';
 import GroupChatusers from './GroupChatusers.js';
 export default function Grouplist({ navigation, route }) {
@@ -54,7 +54,7 @@ export default function Grouplist({ navigation, route }) {
             placeholderTextColor="white"
             textColor="white"
             style={{
-              outline: 'none',
+             
               width: '100%',
 
               fontSize: 17,

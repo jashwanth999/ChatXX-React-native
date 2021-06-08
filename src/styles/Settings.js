@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StatusBar, TextInput } from 'react-native';
-import { Header } from '../Notifications/Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { Avatar } from '../Notifications/Story/node_modules/react-native-elements';
-import { auth, storage, db } from './firebase.js.js';
+import { Avatar } from 'react-native-elements';
+import { auth, storage, db } from '../../firebase.js';
 import * as ImagePicker from 'expo-image-picker';
 export default function Settings({ navigation }) {
   const [image, setImage] = useState(null);
@@ -148,8 +148,8 @@ export default function Settings({ navigation }) {
           <View
             style={{
               display: 'flex',
-              border: 'none',
-              outline: 'none',
+            
+             
               margin: 10,
               flexDirection: 'column',
               width: '79%',
@@ -165,8 +165,8 @@ export default function Settings({ navigation }) {
               style={{
                 height: 40,
                 marginLeft: 7,
-                outline: 'none',
-                border: 'none',
+               
+              
                 fontSize: 17,
               }}
               placeholder={presentuser.username}
@@ -186,8 +186,8 @@ export default function Settings({ navigation }) {
           <View
             style={{
               display: 'flex',
-              border: 'none',
-              outline: 'none',
+            
+             
               margin: 10,
               flexDirection: 'column',
               width: '79%',
@@ -203,8 +203,8 @@ export default function Settings({ navigation }) {
               style={{
                 height: 40,
                 marginLeft: 7,
-                outline: 'none',
-                border: 'none',
+               
+              
                 fontSize: 17,
               }}
               placeholder={presentuser.email}
@@ -228,8 +228,8 @@ export default function Settings({ navigation }) {
           <View
             style={{
               display: 'flex',
-              border: 'none',
-              outline: 'none',
+            
+             
               margin: 10,
               flexDirection: 'column',
               width: '79%',
@@ -245,8 +245,8 @@ export default function Settings({ navigation }) {
               style={{
                 height: 40,
                 marginLeft: 7,
-                outline: 'none',
-                border: 'none',
+               
+              
                 fontSize: 17,
               }}
               placeholder="Nick name"

@@ -6,8 +6,8 @@ import {
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { auth, db } from './firebase.js';
-import Userlist from './Userlist.js';
+import { auth, db } from '../../firebase.js';
+import Userlist from '../../Userlist.js';
 import { ScrollView } from 'react-native-gesture-handler';
 export default function Search({ navigation }) {
   const user = auth.currentUser;

@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { LinearGradient } from 'expo-linear-gradient';
-import { db, auth } from './firebase.js.js.js';
-export default function Homestories({ avatar_url, navigation, username, id }) {
+import { db, auth } from './firebase.js';
+export default function Homestories({ avatar_url, navigation, username, id,userspropic }) {
   const user = auth.currentUser;
+
   setTimeout(() => {
     db.collection('users').doc(user.uid).collection('stories').doc(id).delete();
-  }, 1000 * 60 * 60 * 24);
+  }, 40000);
   return (
     <View
       style={{
@@ -20,6 +20,7 @@ export default function Homestories({ avatar_url, navigation, username, id }) {
         style={{ padding: 2.5 }}
         onPress={() =>
           navigation.navigate('homeview', {
+            userspropic:userspropic,
             url: avatar_url,
             username: username,
           })

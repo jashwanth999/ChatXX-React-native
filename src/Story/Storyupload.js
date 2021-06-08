@@ -11,9 +11,9 @@ import {
 import { Header } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import { Avatar } from 'react-native-elements';
-import { auth, db, storage } from './firebase.js.js.js';
-import firebase from '../src/auth/node_modules/@firebase/app';
-import Activityind from './Activityind.js.js.js';
+import { auth, db, storage } from '../../firebase.js';
+import firebase from '@firebase/app';
+import Activityind from '../styles/Activityind.js';
 function Camerapost({ navigation, route }) {
   const { image, baseimage } = route.params;
   const windowWidth = Dimensions.get('window').width;

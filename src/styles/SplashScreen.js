@@ -8,15 +8,42 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import Userlocation from '../../userlocation';
+import {auth} from '../../firebase.js'
 export default function SplashScreen({ navigation }) {
+  const getdata=async()=>{
+    try{
+      
+    
+    }
+    catch(error)
+    {
+
+    }
+
+  }
   useEffect(() => {
     animate(Easing.bezier(0, 2, 1, -1));
     s();
+
   }, []);
-  const s = () => {
+  const user=auth.currentUser
+  const s =async () => {
+    const email= await AsyncStorage.getItem('email')
+    console.log(email)
     setTimeout(() => {
-      navigation.navigate('drawerscreen');
-    }, 1400);
+      if(email)
+      {
+        navigation.navigate('drawerscreen');
+
+      }
+      else
+      {
+        navigation.navigate("Login")
+      }
+      
+    }, 2000);
   };
 
   let opacity = new Animated.Value(0);
@@ -25,7 +52,7 @@ export default function SplashScreen({ navigation }) {
     opacity.setValue(0);
     Animated.timing(opacity, {
       toValue: 1,
-      duration: 1300,
+      duration: 3000,
       easing,
     }).start();
   };
@@ -57,18 +84,30 @@ export default function SplashScreen({ navigation }) {
 
       <View style={styles.boxContainer}>
         <Animated.View style={animatedStyles}>
-          <Image
-            source={{
-              uri:
-                'https://res.cloudinary.com/jashwanth/image/upload/v1612179860/hauq4vlxuw1iclw6hx0o.jpg',
-            }}
-            style={{ width: 100, height: 100, borderRadius: 50 }}
-          />
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 30,
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+            }}>
+            ChatX
+          </Text>
         </Animated.View>
       </View>
-      <View style={{ position: 'absolute', bottom: 20 }}>
-        <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#8ADAA2' }}>
-          from Jashwanth
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+          from
+        </Text>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#A919DA' }}>
+          Jashwanth
         </Text>
       </View>
     </View>

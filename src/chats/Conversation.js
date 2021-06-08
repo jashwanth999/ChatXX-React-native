@@ -14,7 +14,7 @@ import {
   MaterialIcons,
 } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
-import { db } from '../auth/firebase.js';
+import { db } from '../firebase.js';
 export default function Conversation({
   id,
   message,

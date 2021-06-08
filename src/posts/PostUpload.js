@@ -10,15 +10,15 @@ import {
   ActivityIndicator,
   StatusBar,
 } from 'react-native';
-import * as ImagePicker from '../styles/node_modules/expo-image-picker';
-import { storage, db, auth } from '../auth/firebase.js';
-import { ProgressBar, Colors } from '../Story/node_modules/react-native-paper';
-import { Input } from '../Story/node_modules/react-native-elements';
-import firebase from '../auth/node_modules/@firebase/app';
-import { Header } from '../Story/node_modules/react-native-elements';
+import * as ImagePicker from 'expo-image-picker';
+import { storage, db, auth } from '../firebase.js';
+import { ProgressBar, Colors } from 'react-native-paper';
+import { Input } from 'react-native-elements';
+import firebase from '@firebase/app';
+import { Header } from 'react-native-elements';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { Avatar } from '../Story/node_modules/react-native-elements';
-import Activityind from '../styles/Activityind.js';
+import { Avatar } from 'react-native-elements';
+import Activityind from '../Activityind.js';
 import * as MediaLibrary from 'expo-media-library';
 function Post({ navigation, route }) {
   const user = auth.currentUser;
@@ -73,7 +73,7 @@ function Post({ navigation, route }) {
   };
   const upload = () => {
     setact(true);
-    let apiUrl = 'https://api.cloudinary.com/v1_1/******/image/upload';
+    let apiUrl = 'https://api.cloudinary.com/v1_1/jashwanth/image/upload';
 
     let data = {
       file: baseimage,
@@ -206,14 +206,16 @@ function Post({ navigation, route }) {
                 borderTopLeftRadius: 0,
               }}>
               <TextInput
+              multiline={true}
                 style={{
-                  height: 44,
-                  outline: 'none',
+                  height: 70,
+                 
                   color: 'black',
                   fontSize: 16,
                   width: '100%',
                   flexWrap: 'wrap',
                   fontWeight: 'bold',
+                  padding:3
                 }}
                 onChangeText={(caption) => setCaption(caption)}
                 value={caption}

@@ -7,16 +7,16 @@ import {
 } from '@expo/vector-icons';
 import Notification from '../Notifications/Notification.js';
 import Chat from '../chats/Chats.js';
-import Profile from '../Profile.js';
 import Post from '../posts/Post.js';
 import Nearme from '../Maps/nearme.js';
-import { db, auth } from '../auth/firebase.js';
+import { db, auth } from '../../firebase.js';
+import Cam from '../auth/Camera.js'
 const Tab = createBottomTabNavigator();
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 export default function Mytabs({ navigation }) {
   const user = auth.currentUser;
-
   const [len, setlen] = useState([]);
+
   useEffect(() => {
     db.collection('users')
       .doc(user.uid)
@@ -25,6 +25,8 @@ export default function Mytabs({ navigation }) {
         setlen(snapshot.docs.map((doc) => doc.data()));
       });
   }, [user.uid]);
+
+  
   return (
     <Tab.Navigator
       initialRouteName="Chats"
@@ -59,23 +61,12 @@ export default function Mytabs({ navigation }) {
       />
       <Tab.Screen
         name="camera"
+        component={Cam}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('cam')}>
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  marginBottom: 45,
-                  borderRadius: 50,
-                  alignContent: 'center',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: '#067491',
-                }}>
-                <Ionicons name="camera" color="white" size={28} />
-              </View>
-            </TouchableOpacity>
+          
+                <MaterialCommunityIcons name="plus-box" color={color} size={30} />
+             
           ),
         }}
       />

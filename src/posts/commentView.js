@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Avatar } from '../Story/node_modules/react-native-elements';
+import { Avatar } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
@@ -9,12 +9,6 @@ import {
 } from '@expo/vector-icons';
 import Reply from './reply.js';
 export default function CommentView({ comment, navigation, username, propic }) {
-  const replies = [
-    { reply: 'king' },
-    { reply: 'king' },
-    { reply: 'king' },
-    { reply: 'king' },
-  ];
   const [like, setlike] = useState(false);
   return (
     <View
@@ -53,48 +47,6 @@ export default function CommentView({ comment, navigation, username, propic }) {
             }}>
             {comment}
           </Text>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', width: '65%' }}>
-          <TouchableOpacity
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              flex: 1,
-            }}
-            onPress={() => setlike(!like)}>
-            <AntDesign
-              name={like ? 'like1' : 'like2'}
-              color="black"
-              size={18}
-              style={{}}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              flex: 1,
-            }}
-            onPress={() => setlike(!like)}>
-            <AntDesign
-              name={like ? 'dislike1' : 'dislike2'}
-              color="black"
-              size={18}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              flex: 1,
-            }}>
-            <Text style={{ fontSize: 13, opacity: 0.8, fontWeight: 'bold' }}>
-              Reply
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>

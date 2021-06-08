@@ -14,8 +14,8 @@ import {
   MaterialIcons,
 } from '@expo/vector-icons';
 import Icons from 'react-native-vector-icons/MaterialIcons';
-import MypostView from './MypostView.js';
-import { auth, db } from './firebase.js';
+import MypostView from '../../MypostView.js';
+import { auth, db } from '../../firebase.js';
 
 export default function Myposts({ navigation }) {
   const user = auth.currentUser;

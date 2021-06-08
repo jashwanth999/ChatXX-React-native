@@ -6,18 +6,18 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { Header } from '../src/Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { ListItem, Avatar } from '../src/Story/node_modules/react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 import Followrequest from './Followrequest.js';
 import Likenotify from './Likenotify.js';
 import CommentNotify from './CommentNotify.js';
 import Groupaddingnotify from './Groupaddingnotify.js';
-import { auth, db } from '../auth/firebase.js';
+import { auth, db } from '../firebase.js';
 export default function Notification({ navigation, route }) {
   const user = auth.currentUser;
 
@@ -101,7 +101,7 @@ export default function Notification({ navigation, route }) {
   }, [user.uid]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center' }}>
+    <View style={{ flex: 1, backgroundColor: 'white',  }}>
       <Header
         containerStyle={{
           backgroundColor: '#13E6E6',
@@ -151,6 +151,16 @@ export default function Notification({ navigation, route }) {
             navigation={navigation}
             groupname={value.groupname}
             grouppropic={value.grouppropic}
+          />
+        ))}
+        {likenotify.map(({ id, value }) => (
+          <Likenotify
+            key={id}
+            id={id}
+            username={value.likername}
+            adderid={value.likerid}
+            propic={value.likerpropic}
+            navigation={navigation}
           />
         ))}
       </ScrollView>

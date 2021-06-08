@@ -12,22 +12,22 @@ import {
   Dimensions,
   Keyboard,
 } from 'react-native';
-import { Header } from '../src/Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
   AntDesign,
 } from '@expo/vector-icons';
-import { auth, db } from '../auth/firebase.js';
+import { auth, db } from '../firebase.js';
 import Coversation from './Conversation.js';
-import firebase from '../src/auth/node_modules/@firebase/app';
-import { Avatar } from '../src/Story/node_modules/react-native-elements';
-import * as ImagePicker from '../src/styles/node_modules/expo-image-picker';
+import firebase from '@firebase/app';
+import { Avatar } from 'react-native-elements';
+import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
-import { Button, Overlay } from '../src/Story/node_modules/react-native-elements';
+import { Button, Overlay } from 'react-native-elements';
 import { BottomSheet } from 'react-native-btr';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import Groupusers from './GroupUsers.js';
 import Groupconversation from './Groupcoversation';
 export default function Groupmessagescreen({ route, navigation }) {
@@ -113,7 +113,7 @@ export default function Groupmessagescreen({ route, navigation }) {
 
     if (!result.cancelled) {
       let base64Img = `data:image/jpg;base64,${result.base64}`;
-
+      await AsyncStorage.setItem('message', "true")
       navigation.navigate('Groupchatcamera', {
         image: base64Img,
         groupname: groupname,
@@ -193,7 +193,7 @@ export default function Groupmessagescreen({ route, navigation }) {
       console.log(err);
     }
   }, [roomid, user.uid]);
-  const send = () => {
+  const send = async() => {
     for (let i = 0; i < groupusers.length; i++) {
       db.collection('users')
         .doc(groupusers[i].id)
@@ -251,13 +251,12 @@ export default function Groupmessagescreen({ route, navigation }) {
         createrid: createrid,
         timestamp: new Date(),
         lastmessage: chat,
-
         time:
           d.getHours() +
           ':' +
           `${d.getMinutes() < 9 ? '0' + d.getMinutes() : d.getMinutes()}`,
       });
-
+      await AsyncStorage.setItem('message', "true")
     setChat('');
     Keyboard.dismiss();
   };
@@ -368,7 +367,7 @@ export default function Groupmessagescreen({ route, navigation }) {
               <TextInput
                 style={{
                   height: 42,
-                  outline: 'none',
+              
                   marginLeft: 6,
                   width: '86%',
                   color: 'black',
@@ -449,7 +448,7 @@ export default function Groupmessagescreen({ route, navigation }) {
               }}></View>
           </TouchableOpacity>
           <View style={{ marginTop: 10 }}>
-            <ScrollView style={{ height: 250 }}>
+            <ScrollView style={{ height: 390 }}>
               {users.map(({ id, users }) => (
                 <Groupusers
                   key={id}

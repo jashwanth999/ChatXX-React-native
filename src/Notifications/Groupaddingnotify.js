@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
-import { Header } from '../src/Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { ListItem, Avatar } from '../src/Story/node_modules/react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 export default function Groupaddingnotify({
   username,
   propic,

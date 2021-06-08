@@ -1,34 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StatusBar } from 'react-native';
 import PostView from './PostView.js';
-import { Header } from '../Story/node_modules/react-native-elements';
-import {
-  MaterialCommunityIcons,
-  Ionicons,
-  MaterialIcons,
-} from '@expo/vector-icons';
-import { FAB, Portal, Provider } from '../Story/node_modules/react-native-paper';
-import { auth, db } from '../auth/firebase.js';
+import { Header } from 'react-native-elements';
+import { FAB, Portal, Provider } from 'react-native-paper';
+import { auth, db } from '../../firebase.js';
 export default function Post({ navigation }) {
   const [state, setState] = React.useState({ open: false });
-
   const onStateChange = ({ open }) => setState({ open });
-
   const { open } = state;
   const [images, setImages] = useState([]);
   const user = auth.currentUser;
   const [presetuser, setpresetuser] = useState([]);
-
   useEffect(() => {
     db.collection('users')
       .doc(user.uid)
       .onSnapshot((doc) => {
         setpresetuser(doc.data());
       });
-  }, []);
-
-  useEffect(() => {
-    db.collection('users')
+      db.collection('users')
       .doc(user.uid)
       .collection('images')
       .orderBy('timestamp', 'desc')
@@ -41,6 +30,7 @@ export default function Post({ navigation }) {
         );
       });
   }, []);
+
   return (
     <View>
       <Header

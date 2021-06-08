@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, TouchableOpacity, Image, StatusBar } from 'react-native';
 import { Camera } from 'expo-camera';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Header } from '../src/Story/node_modules/react-native-elements';
-import * as ImagePicker from '../src/styles/node_modules/expo-image-picker';
+import { Header } from 'react-native-elements';
+import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 export default function Groupcamera({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);

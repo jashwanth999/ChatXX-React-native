@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker,Circle } from 'react-native-maps';
 import {
   StyleSheet,
-  Text,
+ 
   View,
-  Dimensions,
+ 
   StatusBar,
-  SafeAreaView,
-  ActivityIndicator,
-  TouchableOpacity,
-  Image,
+ 
+
   ScrollView,
 } from 'react-native';
 import * as Location from 'expo-location';
-import { Header } from '../src/Story/node_modules/react-native-elements';
-import Constants from 'expo-constants';
-import Activityind from '../styles/Activityind.js';
-import { Avatar } from '../src/Story/node_modules/react-native-elements';
-import { Overlay } from '../src/Story/node_modules/react-native-elements';
-import { auth, db } from '../auth/firebase.js';
-import Mapusers from '../Followusers/Mapusers.js';
+import { Avatar } from 'react-native-elements';
+import { auth, db } from '../../firebase.js';
+import Mapusers from './Mapusers.js';
 import { getDistance } from 'geolib';
 
 export default function Mapview({ navigation }) {
@@ -60,7 +54,6 @@ export default function Mapview({ navigation }) {
         setErrorMsg('Permission to access location was denied');
         return;
       }
-
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
       const region = {
@@ -75,6 +68,7 @@ export default function Mapview({ navigation }) {
     })();
   }, []);
 
+
   let text = 'Waiting..';
   if (errorMsg) {
     text = errorMsg;
@@ -83,23 +77,7 @@ export default function Mapview({ navigation }) {
   }
   const [isvisible, setisVisible] = useState(false);
 
-  const toggleOverlay = () => {
-    setisVisible(!isvisible);
-  };
-  const getdis = () => {
-    console.log(
-      getDistance(
-        {
-          latitude: Number(presentuser.latitude),
-          longitude: Number(presentuser.longitude),
-        },
-        {
-          latitude: Number(17.3833),
-          longitude: Number(78.4011),
-        }
-      )
-    );
-  };
+  
 
   return (
     <View
@@ -120,6 +98,7 @@ export default function Mapview({ navigation }) {
           showsUserLocation={true}
           showsMyLocationButton={true}
           onRegionChange={region}>
+          
           {users.map(({ users, id }) =>
             getDistance(
               {
@@ -151,16 +130,23 @@ export default function Mapview({ navigation }) {
               <View></View>
             )
           )}
+            {presentuser.latitude && presentuser.longitude ?(
+             <MapView.Circle
+             key = { (presentuser.latitude + presentuser.longitude).toString() }
+             center = {{latitude: presentuser.latitude,
+                 longitude: presentuser.longitude} }
+             radius = { 2600 }
+             strokeWidth = { 2 }
+             strokeColor = { 'red' }
+             fillColor = { '#F4F1F0' }
 
-          <MapView.Circle
-            center={{
-              latitude: Number(presentuser.latitude),
-              longitude: Number(presentuser.longitude),
-            }}
-            radius={2600}
-            strokeWidth={2}
-            strokeColor={'#ff3333'}
-          />
+         />
+          ):(
+            <View>
+              </View>
+           
+          )}
+       
         </MapView>
         <View
           style={{
@@ -169,10 +155,11 @@ export default function Mapview({ navigation }) {
             bottom: 0,
             alignItems: 'center',
           }}>
+            
           
           <ScrollView
             horizontal
-            style={{ alignItems: 'center', alignContent: 'center' }}>
+            contentContainerStyle={{ alignItems: 'center', alignContent: 'center' }}>
             {users.map(({ users, id }) =>
               getDistance(
                 {
@@ -181,6 +168,7 @@ export default function Mapview({ navigation }) {
                 },
                 {
                   latitude: Number(users.latitude),
+                  
                   longitude: Number(users.longitude),
                 }
               ) < 2600 ? (
@@ -195,6 +183,7 @@ export default function Mapview({ navigation }) {
               )
             )}
           </ScrollView>
+          
         </View>
       </View>
     </View>

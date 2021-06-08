@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StatusBar } from 'react-native';
-import { Header } from '../src/Story/node_modules/react-native-elements';
+import { View, Text, TextInput, StatusBar,ScrollView } from 'react-native';
+import { Header } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { auth, db } from '../auth/firebase.js';
+import { auth, db } from '../firebase.js';
 import Followlist from './Followlist.js';
 export default function Following({ navigation, route }) {
   const { userid } = route.params;
@@ -50,7 +50,7 @@ export default function Following({ navigation, route }) {
             placeholderTextColor="white"
             textColor="white"
             style={{
-              outline: 'none',
+              
               width: '100%',
 
               fontSize: 17,
@@ -63,7 +63,11 @@ export default function Following({ navigation, route }) {
         }
       />
       <StatusBar backgroundColor="#13E6E6" />
+      <ScrollView
+      containerStyle={{height:"100%"}}
+      >
       {using.map(({ id, users }) =>
+
         users.followingname.includes(value) ? (
           <Followlist
             key={id}
@@ -77,6 +81,7 @@ export default function Following({ navigation, route }) {
           <View></View>
         )
       )}
+      </ScrollView>
     </View>
   );
 }

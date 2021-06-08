@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Avatar } from '../Story/node_modules/react-native-elements';
+import { Avatar } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,

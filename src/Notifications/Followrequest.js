@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
-import { Header } from '../src/Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { ListItem, Avatar } from '../src/Story/node_modules/react-native-elements';
-import { db, auth } from '../auth/firebase.js';
+import { ListItem, Avatar } from 'react-native-elements';
+import { db, auth } from '../firebase.js';
 export default function Followrequest({
   username,
   id,

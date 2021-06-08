@@ -24,7 +24,7 @@ import * as Location from 'expo-location';
 
 import { Avatar } from 'react-native-elements';
 import { getDistance } from 'geolib';
-import { auth, db } from './firebase.js';
+import { auth, db } from '../../firebase.js';
 
 
 export default function Userlocation({ navigation, route }) {

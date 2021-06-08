@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StatusBar } from 'react-native';
 import {
   MaterialCommunityIcons,
-  Ionicons,
-  MaterialIcons,
 } from '@expo/vector-icons';
-import { ListItem, Avatar } from 'react-native-elements';
+import {  Avatar } from 'react-native-elements';
 import { ProgressBar, Colors } from 'react-native-paper';
 export default function HomeView({ navigation, route }) {
-  const { url, username } = route.params;
+  const { url, username,userspropic } = route.params;
   const [progress, setprogress] = useState(0);
   setTimeout(() => {
     navigation.navigate('Chats');
@@ -44,7 +42,7 @@ export default function HomeView({ navigation, route }) {
           }}>
           <Avatar
             source={{
-              uri: url,
+              uri: userspropic,
             }}
             rounded
             size="medium"

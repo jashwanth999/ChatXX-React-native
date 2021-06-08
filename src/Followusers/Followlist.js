@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { ListItem, Avatar } from '../src/Story/node_modules/react-native-elements';
-import { auth, db } from '../auth/firebase.js';
+import { ListItem, Avatar } from 'react-native-elements';
+import { auth, db } from '../../firebase.js';
 function Followlist({ username, id, navigation, propic }) {
   const user = auth.currentUser;
   const [presentuser, setPresentuser] = useState([]);

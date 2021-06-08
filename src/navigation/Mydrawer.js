@@ -1,6 +1,6 @@
 import React from 'react'
-import { createDrawerNavigator } from '../chats/node_modules/@react-navigation/drawer';
-import Drawercontent from '../Drawercontent.js';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Drawercontent from '../styles/Drawercontent.js';
 import Mytabs from './Mytabs'
 const Drawer = createDrawerNavigator();
 export default function MyDrawer() {

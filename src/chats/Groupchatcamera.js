@@ -7,11 +7,11 @@ import {
   ActivityIndicator,
   StatusBar,
 } from 'react-native';
-import { Header } from '../src/Story/node_modules/react-native-elements';
+import { Header } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/MaterialIcons';
-import { Avatar } from '../src/Story/node_modules/react-native-elements';
-import { auth, db, storage } from '../auth/firebase.js';
-import firebase from '../src/auth/node_modules/@firebase/app';
+import { Avatar } from 'react-native-elements';
+import { auth, db, storage } from '../firebase.js';
+import firebase from '@firebase/app';
 
 function Groupcamera({ navigation, route }) {
   const {
@@ -76,6 +76,12 @@ function Groupcamera({ navigation, route }) {
       method: 'POST',
     }).then(async (r) => {
       let data = await r.json();
+      setAct(false);
+    navigation.navigate('groupmessagescreen', {
+      username: groupname,
+      roomid: roomid,
+      propic: grouppropic,
+    });
       for (let i = 0; i < groupusers.length; i++) {
         db.collection('users')
           .doc(groupusers[i].id)
@@ -141,12 +147,7 @@ function Groupcamera({ navigation, route }) {
           alert(err);
         });
     });
-    setAct(false);
-    navigation.navigate('groupmessagescreen', {
-      username: groupname,
-      roomid: roomid,
-      propic: grouppropic,
-    });
+    
   };
   return (
     <View style={{ backgroundColor: 'white', height: '100%' }}>
