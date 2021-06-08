@@ -12,8 +12,9 @@ import { Header, Divider } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
-  MaterialIcons,
+
 } from '@expo/vector-icons';
+
 import Chatusers from './Chatusers.js';
 import Homestories from '../Homestories.js';
 import { auth, db } from '../firebase.js';
@@ -29,27 +30,15 @@ export default function Chat({ navigation }) {
   const [groups, setgroups] = useState([]);
   const [visible, setVisible] = useState(false);
   const [groupname, setgroupname] = useState('');
-  
   const toggleOverlay = () => {
     setVisible(!visible);
   };
-  let email;
+  let message;
   const getData=async()=>{
-   email= await AsyncStorage.getItem('email')
+   message= await AsyncStorage.getItem('message')
+   console.log(message)
   }
   useEffect(() => {
-    getData()
-    db.collection('users')
-      .doc(user.uid)
-      .collection('stories')
-      .onSnapshot((snapshot) => {
-        setStories(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            value: doc.data(),
-          }))
-        );
-      });
       db.collection('users')
       .doc(user.uid)
       .onSnapshot((doc) => {
@@ -67,30 +56,62 @@ export default function Chat({ navigation }) {
           }))
         );
       });
-      db.collection('users')
-      .where('userid', '!=', user.uid)
-      .onSnapshot((snapshot) => {
-        setsuggestusers(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            users: doc.data(),
-          }))
-        );
-      });
+    
+  }, [user.uid]);
+  useEffect(()=>{
+    db.collection('users')
+    .doc(user.uid)
+    .collection('stories')
+    .onSnapshot((snapshot) => {
+      setStories(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          value: doc.data(),
+        }))
+      );
+    });
+  },[user.uid])
+  useEffect(()=>{
+    db.collection('users')
+    .where('userid', '!=', user.uid)
+    .onSnapshot((snapshot) => {
+      setsuggestusers(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          users: doc.data(),
+        }))
+      );
+    });
+    
+  },[user.uid])
+  useEffect(() => {
+    getData()
+   
       db.collection('users')
       .doc(user.uid)
-      .collection('groups')
-      .orderBy('timestamp', 'desc')
-      .onSnapshot((snapshot) => {
-        setgroups(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            users: doc.data(),
-          }))
-        );
+      .onSnapshot((doc) => {
+        setPresentuser(doc.data());
       });
+     
+     
   }, [user.uid]);
+  useEffect(()=>{
+    db.collection('users')
+    .doc(user.uid)
+    .collection('groups')
+    .orderBy('timestamp', 'desc')
+    .onSnapshot((snapshot) => {
+      setgroups(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          users: doc.data(),
+        }))
+      );
+    });
 
+  },[user.uid])
+
+  console.log(message)
   const create = () => {
     db.collection('users')
       .doc(user.uid)
@@ -144,7 +165,7 @@ export default function Chat({ navigation }) {
         }
       />
       <StatusBar backgroundColor="#13E6E6" />
-      {users.length ? (
+      { users.length ? (
         <ScrollView style={{ height: '90%' }}>
           <ScrollView
             horizontal={true}
@@ -197,7 +218,7 @@ export default function Chat({ navigation }) {
 
           {users.map(({ id, users }) => (
             <Chatusers
-              
+              key={id}
               id={id}
               navigation={navigation}
               user={user}
@@ -247,6 +268,7 @@ export default function Chat({ navigation }) {
                 showsHorizontalScrollIndicator={false}>
                 {suggestusers.map(({ id, users }) => (
                   <View
+                  key={id}
                     style={{
                       width: 180,
                       height: 200,

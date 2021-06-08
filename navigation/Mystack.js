@@ -41,7 +41,6 @@ export default function Mystacks() {
   useEffect(() => {
     const subscriber = auth.onAuthStateChanged(onAuthStateChanged);
     return subscriber;
-   
   }, []);
  
     return (

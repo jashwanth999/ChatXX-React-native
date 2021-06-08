@@ -14,8 +14,7 @@ import {
   FontAwesome,
 } from '@expo/vector-icons';
 import { auth, db } from './firebase.js.js';
-
-import { Button, Overlay } from '../Notifications/Story/node_modules/react-native-elements';
+import {  Overlay } from '../Notifications/Story/node_modules/react-native-elements';
 export default function Drawercontent({ navigation }) {
   const user = auth.currentUser;
   const [presentuser, setPresentuser] = useState([]);
@@ -23,6 +22,7 @@ export default function Drawercontent({ navigation }) {
   const [groupname, setgroupname] = useState('');
   const [followerlens, setfollowerlen] = useState([]);
   const [followinglen, setfollowinglen] = useState([]);
+ 
   useEffect(() => {
     db.collection('users')
       .doc(user.uid)
@@ -30,6 +30,7 @@ export default function Drawercontent({ navigation }) {
       .onSnapshot((snapshot) => {
         setfollowerlen(snapshot.docs.map((doc) => doc.data()));
       });
+     
   }, [user.uid]);
   useEffect(() => {
     db.collection('users')

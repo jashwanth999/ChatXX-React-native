@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Userlocation from './userlocation';
+import {auth} from './firebase.js'
 export default function SplashScreen({ navigation }) {
   const getdata=async()=>{
     try{
@@ -26,6 +28,7 @@ export default function SplashScreen({ navigation }) {
     s();
 
   }, []);
+  const user=auth.currentUser
   const s =async () => {
     const email= await AsyncStorage.getItem('email')
     console.log(email)

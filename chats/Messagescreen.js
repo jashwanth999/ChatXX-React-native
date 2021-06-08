@@ -24,7 +24,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
 import { Button, Overlay } from 'react-native-elements';
 import { Dimensions, Keyboard } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 export default function Messagescreen({ route, navigation }) {
   const { username, roomid, propic, msgusage, msgid } = route.params;
   const user = auth.currentUser;
@@ -72,7 +72,7 @@ export default function Messagescreen({ route, navigation }) {
 
     if (!result.cancelled) {
       let base64Img = `data:image/jpg;base64,${result.base64}`;
-
+      await AsyncStorage.setItem('message', "true")
       navigation.navigate('Chatcamera', {
         image: base64Img,
         username: username,
@@ -83,7 +83,8 @@ export default function Messagescreen({ route, navigation }) {
     }
   };
 
-  const send = () => {
+  const send = async() => {
+    await AsyncStorage.setItem('message', "true")
     db.collection('users')
       .doc(user.uid)
       .collection('chatusers')
@@ -118,7 +119,6 @@ export default function Messagescreen({ route, navigation }) {
       .doc(user.uid)
       .collection('chatusers')
       .doc(roomid)
-
       .collection('messages')
       .add({
         message: chat,
@@ -132,7 +132,6 @@ export default function Messagescreen({ route, navigation }) {
       .doc(roomid)
       .collection('chatusers')
       .doc(user.uid)
-
       .collection('messages')
       .add({
         message: chat,
@@ -205,9 +204,7 @@ export default function Messagescreen({ route, navigation }) {
     toggleOverlay();
   };
 
-  const scrollref = () => {
-    //setscrollviewref(chat[chats.length - 1].chats.message);
-  };
+ 
   return (
     <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#FCF3CF' }}>
       {deletemsgusage && msgusage ? (

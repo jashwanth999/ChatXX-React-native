@@ -27,7 +27,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Speech from 'expo-speech';
 import { Button, Overlay } from 'react-native-elements';
 import { BottomSheet } from 'react-native-btr';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import Groupusers from './GroupUsers.js';
 import Groupconversation from './Groupcoversation';
 export default function Groupmessagescreen({ route, navigation }) {
@@ -113,7 +113,7 @@ export default function Groupmessagescreen({ route, navigation }) {
 
     if (!result.cancelled) {
       let base64Img = `data:image/jpg;base64,${result.base64}`;
-
+      await AsyncStorage.setItem('message', "true")
       navigation.navigate('Groupchatcamera', {
         image: base64Img,
         groupname: groupname,
@@ -193,7 +193,7 @@ export default function Groupmessagescreen({ route, navigation }) {
       console.log(err);
     }
   }, [roomid, user.uid]);
-  const send = () => {
+  const send = async() => {
     for (let i = 0; i < groupusers.length; i++) {
       db.collection('users')
         .doc(groupusers[i].id)
@@ -251,13 +251,12 @@ export default function Groupmessagescreen({ route, navigation }) {
         createrid: createrid,
         timestamp: new Date(),
         lastmessage: chat,
-
         time:
           d.getHours() +
           ':' +
           `${d.getMinutes() < 9 ? '0' + d.getMinutes() : d.getMinutes()}`,
       });
-
+      await AsyncStorage.setItem('message', "true")
     setChat('');
     Keyboard.dismiss();
   };

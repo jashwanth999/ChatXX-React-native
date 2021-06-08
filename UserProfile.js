@@ -9,12 +9,9 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Ionicons,
-  MaterialIcons,
-  FontAwesome,
 } from '@expo/vector-icons';
 import { auth, db } from './firebase.js';
 import { Header } from 'react-native-elements';

@@ -20,7 +20,6 @@ export default function Login({ navigation }) {
   const [lat, setlat] = useState(null);
   const [long, setlong] = useState(null);
   const [act, setact] = useState(false);
-
   const scrollViewRef = useRef();
   useEffect(() => {
     (async () => {
@@ -44,25 +43,22 @@ export default function Login({ navigation }) {
   }, []);
 
   const login = async() => {
-    
     setact(true);
-
    await auth
       .signInWithEmailAndPassword(email, password)
       
       .then(async() => {
         const user = auth.currentUser;
-        
           db.collection('users').doc(user.uid).update({
             latitude: lat,
             longitude: long,
           });
           try {
             await AsyncStorage.setItem('email', email)
+            navigation.navigate('drawerscreen');
           } catch (e) {
-           
-          }
-        navigation.navigate('drawerscreen');
+
+        }
       })
       .catch((error) => {
         alert(error.message);

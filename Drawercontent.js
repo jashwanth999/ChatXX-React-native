@@ -16,6 +16,7 @@ import {
 } from '@expo/vector-icons';
 import { auth, db } from './firebase.js';
 import {  Overlay } from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 export default function Drawercontent({ navigation }) {
   const user = auth.currentUser;
   const [presentuser, setPresentuser] = useState([]);
@@ -49,9 +50,15 @@ export default function Drawercontent({ navigation }) {
     setVisible(!visible);
   };
   const logout = () => {
-    auth.signOut().then(() => {
+   
+    auth.signOut().then(async() => {
       navigation.navigate('Login');
+      await AsyncStorage.removeItem('email');
+      await AsyncStorage.removeItem('message');
+      
     });
+    
+
   };
   const create = () => {
     db.collection('users')
