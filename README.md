@@ -1,7 +1,7 @@
 
 <h3> ChatXX</h3>
 <h4> It is a real time chat application where we can also find people near by you</h4>
-<h3> Dependencies</h3>
+
 <br>
 
 <div style="display:flex;flexDirection:row;" " width="200" height="400" style="margin:2;"/>
